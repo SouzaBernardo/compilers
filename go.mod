@@ -1,3 +1,3 @@
-module compiladores
+module compilers
 
 go 1.23.2

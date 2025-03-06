@@ -1,33 +1,42 @@
 package main
 
 import (
-	"compiladores/utils"
+	"compilers/phases"
+	"compilers/utils"
+	"errors"
 	"flag"
-	"fmt"
-	"regexp"
 )
 
-func main() {
-	hashmap := make(map[string]string)
-	hashmap["🤩"] = "begin"
-	hashmap["🥳"] = "end"
+func readInputs() (*string, *string, error) {
+	input := flag.String("input", "", "The file to read")
+	output := flag.String("output", "", "The file to create")
+	flag.Parse()
 
-	filename := flag.String("filename", "exemplo.emo", "The file to read")
-	destination := flag.String("destination", "string.go", "The file to create")
-
-	content, err := utils.ReadFile(filename)
-	utils.CreateFileIfNotExists(destination)
-
-	re := regexp.MustCompile(`\s+`)
-	splited := re.Split(content, -1)
-
-	for i, parte := range splited {
-		fmt.Println(i, parte, hashmap[parte])	
+	if *input == "" || *output == "" {
+		return nil, nil, errors.New("you must provide an input and output file")
 	}
 
+	return input, output, nil
+}
 
-	
-	if err != nil { fmt.Println("Erro ao ler o arquivo: %v", err) }
-	
-	fmt.Println(content)
+func main() {
+	input, output, err := readInputs()
+
+	if err != nil {
+		panic(err)
+	}
+
+	fileInput, err := utils.ReadFile(input)
+	if err != nil {
+		panic(err)
+	}
+	lexicalResult := phases.Lexical(&fileInput)
+
+	fileOutput, err := utils.OpenFile(output)
+	if err != nil {
+		panic(err)
+	}
+
+	utils.WriteFile(fileOutput, *lexicalResult)
+	fileOutput.Close()
 }
