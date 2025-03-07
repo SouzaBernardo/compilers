@@ -1,14 +1,11 @@
-<G>          ::= '🏃' <ID> <CMD_PARAMS> <CMD_EXEC>
+<G>          ::= '🏃' <ID> <CMD_EXEC>
 <ID>         ::= [a-zA-Z]+
-<CMD_PARAMS> ::= '(' <PARAMS> ')' 
-<PARAMS>     ::= <PARAM> , <PARAMS>
-<PARAMS>     ::= <PARAM>
 <CMD_EXEC>   ::= '{' <CMDS> '}'
 <CMDS>       ::= <CMD> '\n' <CMDS>
 <CMDS>       ::= <CMD>
 <CMD>        ::= <CMD_IF>
 <CMD>        ::= <CMD_FOR>
-<CMD_FOR>    ::= '🔄' <VAR> '👈' <E> '👉' <E> <CMD_EXEC>
+<CMD_FOR>    ::= '🔄' <VAR> '👈''👉' <E> '👇' <CMD_EXEC>
 <CMD>        ::= <CMD_ASSIGN>
 <CMD_ASSIGN> ::= <VAR> '👈' <E>
 <CMD_WRITE>  ::= '👀' '(' <E> ')'
@@ -32,3 +29,6 @@
 <X>          ::= '(' <E> ')'
 <X>          ::= [0-9]+('.'[0-9]+)
 <X>          ::= <VAR>
+<TYPE>       ::= '🫤'
+<TYPE>       ::= '😇'
+<TYPE>       ::= '🤩'

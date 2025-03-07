@@ -5,7 +5,6 @@ import (
 	"compilers/utils"
 	"errors"
 	"flag"
-	"fmt"
 )
 
 func readInputs() (*string, *string, error) {
@@ -26,18 +25,17 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Output: ", *output)
+
 	fileInput, err := utils.ReadFile(input)
 	if err != nil {
 		panic(err)
 	}
-	lexicalResult := phases.Lexical(&fileInput)
-	fmt.Println(*lexicalResult)
-	// fileOutput, err := utils.OpenFile(output)
-	// if err != nil {
-	// 	panic(err)
-	// }
 
-	// utils.WriteFile(fileOutput, *lexicalResult)
-	// fileOutput.Close()
+	lexicalResult := phases.Lexical(&fileInput)
+	fileOutput, err := utils.OpenFile(output)
+	if err != nil {
+		panic(err)
+	}
+
+	utils.WriteFile(fileOutput, lexicalResult)
 }

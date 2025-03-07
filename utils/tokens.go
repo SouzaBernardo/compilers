@@ -1,22 +1,28 @@
 package utils
 
+const (
+	ID = ""
+)
 
-const ID = 0
-var tokens = map[rune]int{
-    '🏃': 1,
-    '🔄': 2,
-    '👈': 3,
-    '👀': 4,
-    '👉': 5,
-    '🤔': 6,
-    '🫣': 7,
+var tokens = map[rune]string{
+	'🏃': "func",
+	'🔄': "for",
+	'👈': ":=",
+	'👀': "println",
+	'👉': "range make([]int,",
+    '👇': ")",
+	'🤔': "if",
+	'🫣': "else if",
+    '🤩': "bool",
+    '😇': "int",
+    '🫤': "string",
 }
 
-func GetTokenValue(token rune) int {
-    result, exists := tokens[token]
-    if exists {
-        return result
-    } else {
-        return ID
-    }
+func GetTokenValue(token rune) (string, bool) {
+	result, exists := tokens[token]
+	if exists {
+		return result, true
+	} else {
+		return ID, false
+	}
 }

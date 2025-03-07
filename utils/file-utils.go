@@ -15,12 +15,12 @@ func OpenFile(filename *string) (*os.File, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	//defer file.Close()
 	return file, nil
 }
 
-func WriteFile(file *os.File, content string) error {
-	_, err := file.WriteString(content)
+func WriteFile(file *os.File, content *string) error {
+	_, err := file.WriteString(*content)
 	if err != nil {
 		return err
 	}
