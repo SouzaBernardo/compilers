@@ -5,10 +5,23 @@ import (
 	"compilers/utils"
 	"errors"
 	"flag"
+	"regexp"
 )
 
+
+func isEmojiFile(filename string) bool {
+    re := regexp.MustCompile(`\.emoji$`)
+    return re.MatchString(filename)
+}
+
 func readInputs() (*string, *string, error) {
-	input := flag.String("input", "exemplo.emo", "The file to read")
+
+	isValid := isEmojiFile("exemplo.emoji")
+	if !isValid {
+		return nil, nil, errors.New("the file must have the .emoji extension")
+	}
+
+	input := flag.String("input", "exemplo.emoji", "The file to read")
 	output := flag.String("output", "output.js", "The file to create")
 	flag.Parse()
 
