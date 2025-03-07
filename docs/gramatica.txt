@@ -11,9 +11,9 @@
 <CMD_FOR>    ::= '🔄' <VAR> '👈' <E> '👉' <E> <CMD_EXEC>
 <CMD>        ::= <CMD_ASSIGN>
 <CMD_ASSIGN> ::= <VAR> '👈' <E>
-<CMD_WRITE>  ::= '✍️' '(' <E> ')'
+<CMD_WRITE>  ::= '👀' '(' <E> ')'
 <CMD_IF>     ::= '🤔' <COND> <CMD_EXEC>
-<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC> '🤔🤔' <COND> <CMD_EXEC>
+<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC> '🫣' <COND> <CMD_EXEC>
 <COND>       ::= <E> '>' <E> 
 <COND>       ::= <E> '>=' <E> 
 <COND>       ::= <E> '!=' <E> 
