@@ -10,12 +10,12 @@ var tokens = map[rune]string{
 	'👈': ":=",
 	'👀': "println",
 	'👉': "range make([]int,",
-    '👇': ")",
+	'👇': ")",
 	'🤔': "if",
 	'🫣': "else if",
-    '🤩': "bool",
-    '😇': "int",
-    '🫤': "string",
+	'🤩': "bool",
+	'😇': "int",
+	'🫤': "string",
 }
 
 func GetTokenValue(token rune) (string, bool) {
