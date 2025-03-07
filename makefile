@@ -1,2 +1,2 @@
 run:
-	go run main.go --input="exemplo.emo" --output="exemplo.js"
+	go run main.go --input="docs/exemplo.emoji" --output="exemplo.js"

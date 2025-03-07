@@ -1,6 +1,16 @@
 package utils
 
-var tokens = map[string]string{
-    "🤠": "function main",
+var Tokens = map[string]string{
+    "🤠": "function",
     "🖨️": "console.log",
+    "👈": "=",
+    "🎲": "const",
+    "🔁": "for",
+    "🤔": "if",
+    "👍": "true",
+    "👎": "false",
+    // 40: "(",
+    // 41: ")",
+    "{": "{",
+    "}": "}",
 }

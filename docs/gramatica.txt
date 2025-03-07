@@ -1,0 +1,34 @@
+<G>          ::= '🏃' <ID> <CMD_PARAMS> <CMD_EXEC>
+<ID>         ::= [a-zA-Z]+
+<CMD_PARAMS> ::= '(' <PARAMS> ')' 
+<PARAMS>     ::= <PARAM> , <PARAMS>
+<PARAMS>     ::= <PARAM>
+<CMD_EXEC>   ::= '{' <CMDS> '}'
+<CMDS>       ::= <CMD> '\n' <CMDS>
+<CMDS>       ::= <CMD>
+<CMD>        ::= <CMD_IF>
+<CMD>        ::= <CMD_FOR>
+<CMD_FOR>    ::= '🔄' <VAR> '👈' <E> '👉' <E> <CMD_EXEC>
+<CMD>        ::= <CMD_ASSIGN>
+<CMD_ASSIGN> ::= <VAR> '👈' <E>
+<CMD_WRITE>  ::= '✍️' '(' <E> ')'
+<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC>
+<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC> '🤔🤔' <COND> <CMD_EXEC>
+<COND>       ::= <E> '>' <E> 
+<COND>       ::= <E> '>=' <E> 
+<COND>       ::= <E> '!=' <E> 
+<COND>       ::= <E> '<=' <E> 
+<COND>       ::= <E> '<' <E> 
+<COND>       ::= <E> '==' <E>
+<E>          ::= <E> + <T>
+<E>          ::= <E> - <T>
+<E>          ::= <T>
+<T>          ::= <T> * <F>
+<T>          ::= <T> / <F>
+<T>          ::= <T> % <F>
+<T>          ::= <F>
+<F>          ::= -<F>
+<F>          ::= <X>
+<X>          ::= '(' <E> ')'
+<X>          ::= [0-9]+('.'[0-9]+)
+<X>          ::= <VAR>

@@ -5,11 +5,12 @@ import (
 	"compilers/utils"
 	"errors"
 	"flag"
+	"fmt"
 )
 
 func readInputs() (*string, *string, error) {
-	input := flag.String("input", "", "The file to read")
-	output := flag.String("output", "", "The file to create")
+	input := flag.String("input", "exemplo.emo", "The file to read")
+	output := flag.String("output", "output.js", "The file to create")
 	flag.Parse()
 
 	if *input == "" || *output == "" {
@@ -25,18 +26,18 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println("Output: ", *output)
 	fileInput, err := utils.ReadFile(input)
 	if err != nil {
 		panic(err)
 	}
 	lexicalResult := phases.Lexical(&fileInput)
+	fmt.Println(*lexicalResult)
+	// fileOutput, err := utils.OpenFile(output)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	fileOutput, err := utils.OpenFile(output)
-	if err != nil {
-		panic(err)
-	}
-
-	utils.WriteFile(fileOutput, *lexicalResult)
-	fileOutput.Close()
+	// utils.WriteFile(fileOutput, *lexicalResult)
+	// fileOutput.Close()
 }
