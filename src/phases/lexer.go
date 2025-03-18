@@ -1,6 +1,9 @@
 package phases
 
-import "compilers/src/common"
+import (
+	"compilers/src/common"
+	"strings"
+)
 
 type ILexer interface {
 	skipWhitespace()
@@ -10,31 +13,25 @@ type ILexer interface {
 }
 
 type Lexer struct {
-	source   string
-	position int
+	phase *Phase
 }
 
 func NewLexer(source string) *Lexer {
-	return &Lexer{source: source, position: 0}
-}
-
-func (l *Lexer) skipWhitespace() {
-
-}
-func (l *Lexer) match() {
-
-}
-func (l *Lexer) NextToken() *common.Token {
-	return &common.Token{}
-}
-
-func (l *Lexer) Tokenize() *[]common.Token {
-	return &[]common.Token{}
+	return &Lexer{phase: &Phase{source: source, position: 0}}
 }
 
 func (l *Lexer) Validate() bool {
-
-
-
-	return false
+	lines := strings.Split(l.phase.source, "\n")
+	println(lines[0])
+	for {
+		token := l.phase.NextToken()
+		println(token.Content, token.Type)
+		if token.Type == TOKEN_UNKNOWN {
+			return false
+		}
+		if token.Type == TOKEN_EOF {
+			break
+		}
+	}
+	return true
 }

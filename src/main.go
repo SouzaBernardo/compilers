@@ -30,5 +30,8 @@ func main() {
 	}
 
 	compiler := NewCompiler(source)
-	compiler.lexer.Validate()
+	complete := compiler.lexer.Validate()
+	if !complete {
+		panic("error")
+	}
 }

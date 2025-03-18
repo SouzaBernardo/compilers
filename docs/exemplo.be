@@ -5,7 +5,7 @@ funcao principal(A1 int, B2 string, C3 bool) {
     se (B2 == "HELLO") {
         mostrar(B2)
     }
-    se (C3 == true) {
+    se (C3 == verdadeiro) {
         mostrar(C3)
     }
 }
