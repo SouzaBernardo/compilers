@@ -4,24 +4,13 @@ const (
 	ID = 32
 )
 
-var tokens = map[string]int{
-	"🏃": 1,
-	"🔄": 2,
-	"👈": 3,
-	"👀": 4,
-	"👉": 5,
-	"👇": 6,
-	"🤔": 7,
-	"🫣": 8,
-	"🤩": 9,
-	"😇": 10,
-	"🫤": 11,
-}
-
-func GetLexemes(token string) int {
-	result, exists := tokens[token]
-	if exists {
-		return result
-	}
-	return ID
+var Tokens = map[string]rune{
+	"FUNCAO":    1,
+	"(":         2,
+	")":         3,
+	"PRINCIPAL": 4,
+	"STRING":    5,
+	"BOOL":      6,
+	"INT":       7,
+	"MOSTRAR":   8,
 }

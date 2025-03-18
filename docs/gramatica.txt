@@ -1,34 +1,34 @@
-<G>          ::= '🏃' <ID> <CMD_EXEC>
-<ID>         ::= [a-zA-Z]+
-<CMD_EXEC>   ::= '{' <CMDS> '}'
-<CMDS>       ::= <CMD> '\n' <CMDS>
-<CMDS>       ::= <CMD>
-<CMD>        ::= <CMD_IF>
-<CMD>        ::= <CMD_FOR>
-<CMD_FOR>    ::= '🔄' <VAR> '👈''👉' <E> '👇' <CMD_EXEC>
-<CMD>        ::= <CMD_ASSIGN>
-<CMD_ASSIGN> ::= <VAR> '👈' <E>
-<CMD_WRITE>  ::= '👀' '(' <E> ')'
-<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC>
-<CMD_IF>     ::= '🤔' <COND> <CMD_EXEC> '🫣' <COND> <CMD_EXEC>
-<COND>       ::= <E> '>' <E> 
-<COND>       ::= <E> '>=' <E> 
-<COND>       ::= <E> '!=' <E> 
-<COND>       ::= <E> '<=' <E> 
-<COND>       ::= <E> '<' <E> 
-<COND>       ::= <E> '==' <E>
-<E>          ::= <E> + <T>
-<E>          ::= <E> - <T>
-<E>          ::= <T>
-<T>          ::= <T> * <F>
-<T>          ::= <T> / <F>
-<T>          ::= <T> % <F>
-<T>          ::= <F>
-<F>          ::= -<F>
-<F>          ::= <X>
-<X>          ::= '(' <E> ')'
-<X>          ::= [0-9]+('.'[0-9]+)
-<X>          ::= <VAR>
-<TYPE>       ::= '🫤'
-<TYPE>       ::= '😇'
-<TYPE>       ::= '🤩'
+<G>    ::= 'funcao' 'principal' '(' <VARS> ')' '{' <CMDS> '}'
+<VARS> ::= ε
+<VARS> ::= <VAR> , <VARS>
+<VARS> ::= <VAR>
+<VAR>  ::= <ID> <TYPE>
+<ID>   ::= [A-Z]+[0-9]*
+<TYPE> ::= 'string'
+<TYPE> ::= 'int'
+<TYPE> ::= 'bool'
+<CMDS> ::= ε
+<CMDS> ::= <CMD> '\n' <CMDS>
+<CMD>  ::= <CMD_IF> 
+<CMD>  ::= <CMD_SHOW>
+<CMD_SHOW> ::= 'mostrar' '(' <E> ')'
+<CMD_IF> ::= 'se' '(' <CONDI> ')' '{' <CMDS> '}'
+<CONDI>  ::= <E> '>' <E> 
+<CONDI> ::= <E> '>=' <E> 
+<CONDI> ::= <E> '<>' <E> 
+<CONDI> ::= <E> '<=' <E> 
+<CONDI> ::= <E> '<' <E> 
+<CONDI> ::= <E> '==' <E>
+<E> ::= <E> + <T>
+<E> ::= <E> - <T>
+<E> ::= <T>
+<E> ::= <ID>
+<T> ::= <T> * <F>
+<T> ::= <T> / <F>
+<T> ::= <T> % <F>
+<T> ::= <F>
+<F> ::= -<F>
+<F> ::= <X> ** <F>
+<F> ::= <X>
+<X> ::= '(' <E> ')'
+<X> ::= [0-9]+('.'[0-9]+)
