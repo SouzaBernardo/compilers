@@ -2,20 +2,10 @@ package main
 
 import (
 	"compilers/src/common"
-	"compilers/src/phases"
+	"compilers/src/core"
 )
 
-type Compiller struct {
-	source string
-	lexer  *phases.Lexer
-}
 
-func NewCompiler(source string) *Compiller {
-	return &Compiller{
-		source: source,
-		lexer:  phases.NewLexer(source),
-	}
-}
 
 func main() {
 	input, _, err := common.ReadInputs()
@@ -29,9 +19,10 @@ func main() {
 		panic(err)
 	}
 
-	compiler := NewCompiler(source)
-	_, complete := compiler.lexer.Validate()
+	compiler := core.NewCompiler(source)
+	tokens, complete := compiler.LexerValidate()
 	if !complete {
 		panic("error")
 	}
+	compiler.Parse(tokens)
 }

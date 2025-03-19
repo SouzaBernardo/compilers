@@ -1,4 +1,4 @@
-<G>    ::= 'funcao' 'principal' '(' <VARS> ')' '{' <CMDS> '}'
+<G>    ::= '🛬' '🚧' '(' <VARS> ')' '{' <CMDS> '}'
 <VARS> ::= ε
 <VARS> ::= <VAR> , <VARS>
 <VARS> ::= <VAR>
@@ -11,8 +11,8 @@
 <CMDS> ::= <CMD> '\n' <CMDS>
 <CMD>  ::= <CMD_IF> 
 <CMD>  ::= <CMD_SHOW>
-<CMD_SHOW> ::= 'mostrar' '(' <E> ')'
-<CMD_IF> ::= 'se' '(' <CONDI> ')' '{' <CMDS> '}'
+<CMD_SHOW> ::= '👀' '(' <E> ')'
+<CMD_IF> ::= '🤨' '(' <CONDI> ')' '{' <CMDS> '}'
 <CONDI>  ::= <E> '>' <E> 
 <CONDI> ::= <E> '>=' <E> 
 <CONDI> ::= <E> '<>' <E> 

@@ -1,11 +1,11 @@
-funcao principal(A1 int, B2 string, C3 bool) {
-    se (A1 > 10) {
-        mostrar(A1)
+🛬 🚧(A1 int, B2 string, C3 bool) {
+    🤨 (A1 > 10) {
+        👀(A1)
     }
-    se (B2 == "HELLO") {
-        mostrar(B2)
+    🤨 (B2 == "HELLO") {
+        👀(B2)
     }
-    se (C3 == verdadeiro) {
-        mostrar(C3)
+    🤨 (C3 == 👍) {
+        👀(C3)
     }
 }

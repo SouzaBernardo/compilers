@@ -1,4 +1,4 @@
-package phases
+package core
 
 import (
 	"compilers/src/common"
@@ -26,15 +26,15 @@ const (
 )
 
 var patterns = map[common.TokenType]*regexp.Regexp{
-	"TOKEN_FUNC":       regexp.MustCompile(`^funcao`),
-	"TOKEN_MAIN_FUNC":  regexp.MustCompile(`^principal`),
-	"TOKEN_SHOW":       regexp.MustCompile(`^mostrar`),
-	"TOKEN_IF":         regexp.MustCompile(`^se`),
-	"TOKEN_BOOL_TRUE":  regexp.MustCompile(`^verdadeiro`),
-	"TOKEN_BOOL_FALSE": regexp.MustCompile(`^falso`),
-	"TOKEN_ID":         regexp.MustCompile(`^[A-Z]+[0-9]*`),
-	"TOKEN_TYPE":       regexp.MustCompile(`^(string|int|bool)`),
-	"TOKEN_OP":         regexp.MustCompile(`^(==|>=|<=|<>|>|<|\+|-|\*|/|%)`),
+	"TOKEN_FUNC":       regexp.MustCompile(`^🛬`), // function
+	"TOKEN_MAIN_FUNC":  regexp.MustCompile(`^🚧`), // main
+	"TOKEN_SHOW":       regexp.MustCompile(`^👀`), // print
+	"TOKEN_IF":         regexp.MustCompile(`^🤨`), // if
+	"TOKEN_BOOL_TRUE":  regexp.MustCompile(`^👍`), // true
+	"TOKEN_BOOL_FALSE": regexp.MustCompile(`^👎`), // false
+	"TOKEN_ID":         regexp.MustCompile(`^[A-Z]+[0-9]*`), // variables
+	"TOKEN_TYPE":       regexp.MustCompile(`^(string|int|bool)`), // types (string | int | bool)
+	"TOKEN_OP":         regexp.MustCompile(`^(==|>=|<=|<>|>|<|\+|-|\*|/|%)`), // operators
 	"TOKEN_NUMBER":     regexp.MustCompile(`^[0-9]+(\.[0-9]+)?`),
 	"TOKEN_STRING":     regexp.MustCompile(`^"([^"]*)"`),
 	"TOKEN_LPAREN":     regexp.MustCompile(`^\(`),

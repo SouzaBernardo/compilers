@@ -1,15 +1,9 @@
-package phases
+package core
 
 import (
 	"compilers/src/common"
 )
 
-type ILexer interface {
-	skipWhitespace()
-	match() (string, bool)
-	NextToken() *common.Token
-	Tokenize() *[]common.Token
-}
 
 type Lexer struct {
 	phase *Phase
