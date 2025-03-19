@@ -30,7 +30,7 @@ func main() {
 	}
 
 	compiler := NewCompiler(source)
-	complete := compiler.lexer.Validate()
+	_, complete := compiler.lexer.Validate()
 	if !complete {
 		panic("error")
 	}

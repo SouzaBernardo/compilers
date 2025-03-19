@@ -2,7 +2,6 @@ package phases
 
 import (
 	"compilers/src/common"
-	"strings"
 )
 
 type ILexer interface {
@@ -20,18 +19,17 @@ func NewLexer(source string) *Lexer {
 	return &Lexer{phase: &Phase{source: source, position: 0}}
 }
 
-func (l *Lexer) Validate() bool {
-	lines := strings.Split(l.phase.source, "\n")
-	println(lines[0])
+func (l *Lexer) Validate() (*[]common.Token, bool) {
+	tokens := []common.Token{}
 	for {
 		token := l.phase.NextToken()
-		println(token.Content, token.Type)
 		if token.Type == TOKEN_UNKNOWN {
-			return false
+			return nil, false
 		}
+		tokens = append(tokens, *token)
 		if token.Type == TOKEN_EOF {
 			break
 		}
 	}
-	return true
+	return &tokens, true
 }
