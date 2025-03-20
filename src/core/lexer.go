@@ -17,6 +17,7 @@ func (l *Lexer) Validate() (*[]common.Token, bool) {
 	tokens := []common.Token{}
 	for {
 		token := l.phase.NextToken()
+		println(token.Content, token.Type)
 		if token.Type == TOKEN_UNKNOWN {
 			return nil, false
 		}

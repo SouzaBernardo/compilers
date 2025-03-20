@@ -11,5 +11,22 @@ func NewParser(tokens *[]common.Token) *Parser {
 }
 
 func (p *Parser) Parse() bool {
+
+	for i, token := range *(p.tokens) {
+		println(i, token.Content)
+	}
+
 	return false
 }
+
+// func handleSyntax(tokens *common.Token, position int) {
+// 	switch tokens.Type {
+// 	case TOKEN_FUNC:
+// 		tokenFunc
+
+// 	}
+
+// }
+// func tokenFunc() {
+
+// }

@@ -7,14 +7,13 @@ import (
 )
 
 func isValidFile(filename string) bool {
-	re := regexp.MustCompile(`\.be$`)
+	re := regexp.MustCompile(`\.emoji$`)
 	return re.MatchString(filename)
 }
 
 func ReadInputs() (*string, *string, error) {
 
-	
-	input := flag.String("input", "docs/exemplo.be", "The file to read")
+	input := flag.String("input", "docs/exemplo.emoji", "The file to read")
 	output := flag.String("output", "output.js", "The file to create")
 	flag.Parse()
 
@@ -22,7 +21,6 @@ func ReadInputs() (*string, *string, error) {
 	if !isValid {
 		return nil, nil, errors.New("the file must have the .emoji extension")
 	}
-
 
 	if *input == "" || *output == "" {
 		return nil, nil, errors.New("you must provide an input and output file")
