@@ -7,30 +7,31 @@ import (
 )
 
 const (
-	TOKEN_FUNC       common.TokenType = "FUNC"
-	TOKEN_ID         common.TokenType = "ID"
-	TOKEN_TYPE       common.TokenType = "TYPE"
-	TOKEN_SHOW       common.TokenType = "SHOW"
-	TOKEN_IF         common.TokenType = "IF"
-	TOKEN_FOR        common.TokenType = "FOR"
-	TOKEN_ASSINGMENT common.TokenType = "ASSINGMENT"
-	TOKEN_OP         common.TokenType = "OP"
-	TOKEN_NUMBER     common.TokenType = "NUMBER"
-	TOKEN_LOOP_SPLIT common.TokenType = "SPLIT"
-	TOKEN_STRING     common.TokenType = "STRING"
-	TOKEN_LPAREN     common.TokenType = "LPAREN"
-	TOKEN_RPAREN     common.TokenType = "RPAREN"
-	TOKEN_LBRACE     common.TokenType = "LBRACE"
-	TOKEN_RBRACE     common.TokenType = "RBRACE"
-	TOKEN_COMMA      common.TokenType = "COMMA"
-	TOKEN_NEWLINE    common.TokenType = "NEWLINE"
-	TOKEN_UNKNOWN    common.TokenType = "UNKNOWN"
-	TOKEN_EOF        common.TokenType = "EOF"
+	TOKEN_FUNC       common.TokenType = "TOKEN_FUNC"
+	TOKEN_ID         common.TokenType = "TOKEN_ID"
+	TOKEN_FUNC_MAIN  common.TokenType = "TOKEN_FUNC_MAIN"
+	TOKEN_TYPE       common.TokenType = "TOKEN_TYPE"
+	TOKEN_SHOW       common.TokenType = "TOKEN_SHOW"
+	TOKEN_IF         common.TokenType = "TOKEN_IF"
+	TOKEN_FOR        common.TokenType = "TOKEN_FOR"
+	TOKEN_ASSINGMENT common.TokenType = "TOKEN_ASSINGMENT"
+	TOKEN_OP         common.TokenType = "TOKEN_OP"
+	TOKEN_NUMBER     common.TokenType = "TOKEN_NUMBER"
+	TOKEN_LOOP_SPLIT common.TokenType = "TOKEN_LOOP_SPLIT"
+	TOKEN_STRING     common.TokenType = "TOKEN_STRING"
+	TOKEN_LPAREN     common.TokenType = "TOKEN_LPAREN"
+	TOKEN_RPAREN     common.TokenType = "TOKEN_RPAREN"
+	TOKEN_LBRACE     common.TokenType = "TOKEN_LBRACE"
+	TOKEN_RBRACE     common.TokenType = "TOKEN_RBRACE"
+	TOKEN_COMMA      common.TokenType = "TOKEN_COMMA"
+	TOKEN_NEWLINE    common.TokenType = "TOKEN_NEWLINE"
+	TOKEN_UNKNOWN    common.TokenType = "TOKEN_UNKNOWN"
+	TOKEN_EOF        common.TokenType = "TOKEN_EOF"
 )
 
 var patterns = map[common.TokenType]*regexp.Regexp{
 	"TOKEN_FUNC":       regexp.MustCompile(`^🛬`),
-	"TOKEN_MAIN_FUNC":  regexp.MustCompile(`^🚧`),
+	"TOKEN_FUNC_MAIN":  regexp.MustCompile(`^🚧`),
 	"TOKEN_SHOW":       regexp.MustCompile(`^👀`),
 	"TOKEN_IF":         regexp.MustCompile(`^🤨`),
 	"TOKEN_BOOL_TRUE":  regexp.MustCompile(`^👍`),

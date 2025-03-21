@@ -20,9 +20,9 @@ func main() {
 	}
 
 	compiler := core.NewCompiler(source)
-	_, complete := compiler.LexerValidate()
+	tokens, complete := compiler.LexerValidate()
 	if !complete {
 		panic("error")
 	}
-	//compiler.Parse(tokens)
+	compiler.Parse(tokens)
 }
