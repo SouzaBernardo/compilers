@@ -5,8 +5,6 @@ import (
 	"compilers/src/core"
 )
 
-
-
 func main() {
 	input, _, err := common.ReadInputs()
 
@@ -20,9 +18,6 @@ func main() {
 	}
 
 	compiler := core.NewCompiler(source)
-	tokens, complete := compiler.LexerValidate()
-	if !complete {
-		panic("error")
-	}
+	tokens := compiler.LexerValidate()
 	compiler.Parse(tokens)
 }

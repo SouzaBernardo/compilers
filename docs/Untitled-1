@@ -1,0 +1,12 @@
+
+
+| pilha       | entrada     | saida     |
+| $E          | (id + id)$  |           |
+| $E'T        | (id + id)$  | E -> E'T  |
+| $E'T'F      | (id + id)$  | T -> T'F  |
+| $E'T')E(    | (id + id)$  | F -> (E)  |
+| $E'T')E     | id + id)$   | E -> TE'  |
+| $E'T')E'T   | id + id)$   | E -> TE'  |
+| $E'T')E'T'F | id + id)$   | T -> TF'  |
+| $E'T')E'Tid | id + id)$   | F -> id   |
+| $E'T')E'T   | + id)$      | E -> TE'  |

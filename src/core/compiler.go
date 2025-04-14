@@ -1,7 +1,8 @@
 package core
 
 import (
-	"compilers/src/common"
+	"compilers/src/token"
+	"fmt"
 )
 
 type Compiler struct {
@@ -17,16 +18,23 @@ func NewCompiler(source string) *Compiler {
 	}
 }
 
-func (c *Compiler) LexerValidate() (*[]common.Token, bool) {
+func (c *Compiler) LexerValidate() *[]token.Token {
 	if c.lexer == nil {
 		panic("Lexer is null")
 	}
-	return c.lexer.Validate()
+	r, err := c.lexer.Validate()
+	if err {
+		panic("error")
+	} else {
+		fmt.Println("Lexer complete")
+	}
+	return r
 }
 
-func (c *Compiler) Parse(tokens *[]common.Token) {
+func (c *Compiler) Parse(tokens *[]token.Token) {
 	if c.parser == nil {
-		c.parser = NewParser(tokens)
+		c.parser = NewParser(*tokens)
 	}
 	c.parser.Parse()
+	fmt.Println("Sintax complete")
 }

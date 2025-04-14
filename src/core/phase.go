@@ -1,35 +1,35 @@
 package core
 
 import (
-	"compilers/src/common"
+	"compilers/src/token"
 	"regexp"
 	"unicode"
 )
 
 const (
-	TOKEN_FUNC       common.TokenType = "TOKEN_FUNC"
-	TOKEN_ID         common.TokenType = "TOKEN_ID"
-	TOKEN_FUNC_MAIN  common.TokenType = "TOKEN_FUNC_MAIN"
-	TOKEN_TYPE       common.TokenType = "TOKEN_TYPE"
-	TOKEN_SHOW       common.TokenType = "TOKEN_SHOW"
-	TOKEN_IF         common.TokenType = "TOKEN_IF"
-	TOKEN_FOR        common.TokenType = "TOKEN_FOR"
-	TOKEN_ASSINGMENT common.TokenType = "TOKEN_ASSINGMENT"
-	TOKEN_OP         common.TokenType = "TOKEN_OP"
-	TOKEN_NUMBER     common.TokenType = "TOKEN_NUMBER"
-	TOKEN_LOOP_SPLIT common.TokenType = "TOKEN_LOOP_SPLIT"
-	TOKEN_STRING     common.TokenType = "TOKEN_STRING"
-	TOKEN_LPAREN     common.TokenType = "TOKEN_LPAREN"
-	TOKEN_RPAREN     common.TokenType = "TOKEN_RPAREN"
-	TOKEN_LBRACE     common.TokenType = "TOKEN_LBRACE"
-	TOKEN_RBRACE     common.TokenType = "TOKEN_RBRACE"
-	TOKEN_COMMA      common.TokenType = "TOKEN_COMMA"
-	TOKEN_NEWLINE    common.TokenType = "TOKEN_NEWLINE"
-	TOKEN_UNKNOWN    common.TokenType = "TOKEN_UNKNOWN"
-	TOKEN_EOF        common.TokenType = "TOKEN_EOF"
+	TOKEN_FUNC       token.TokenType = "TOKEN_FUNC"
+	TOKEN_ID         token.TokenType = "TOKEN_ID"
+	TOKEN_FUNC_MAIN  token.TokenType = "TOKEN_FUNC_MAIN"
+	TOKEN_TYPE       token.TokenType = "TOKEN_TYPE"
+	TOKEN_SHOW       token.TokenType = "TOKEN_SHOW"
+	TOKEN_IF         token.TokenType = "TOKEN_IF"
+	TOKEN_FOR        token.TokenType = "TOKEN_FOR"
+	TOKEN_ASSINGMENT token.TokenType = "TOKEN_ASSINGMENT"
+	TOKEN_OP         token.TokenType = "TOKEN_OP"
+	TOKEN_NUMBER     token.TokenType = "TOKEN_NUMBER"
+	TOKEN_LOOP_SPLIT token.TokenType = "TOKEN_LOOP_SPLIT"
+	TOKEN_STRING     token.TokenType = "TOKEN_STRING"
+	TOKEN_LPAREN     token.TokenType = "TOKEN_LPAREN"
+	TOKEN_RPAREN     token.TokenType = "TOKEN_RPAREN"
+	TOKEN_LBRACE     token.TokenType = "TOKEN_LBRACE"
+	TOKEN_RBRACE     token.TokenType = "TOKEN_RBRACE"
+	TOKEN_COMMA      token.TokenType = "TOKEN_COMMA"
+	TOKEN_NEWLINE    token.TokenType = "TOKEN_NEWLINE"
+	TOKEN_UNKNOWN    token.TokenType = "TOKEN_UNKNOWN"
+	TOKEN_EOF        token.TokenType = "TOKEN_EOF"
 )
 
-var patterns = map[common.TokenType]*regexp.Regexp{
+var patterns = map[token.TokenType]*regexp.Regexp{
 	"TOKEN_FUNC":       regexp.MustCompile(`^🛬`),
 	"TOKEN_FUNC_MAIN":  regexp.MustCompile(`^🚧`),
 	"TOKEN_SHOW":       regexp.MustCompile(`^👀`),
@@ -41,13 +41,13 @@ var patterns = map[common.TokenType]*regexp.Regexp{
 	"TOKEN_LOOP_SPLIT": regexp.MustCompile(`^;`),
 	"TOKEN_ID":         regexp.MustCompile(`^[A-Z]+[0-9]*`),
 	"TOKEN_TYPE":       regexp.MustCompile(`^(string|int|bool)`),
-	"TOKEN_OP":         regexp.MustCompile(`^(==|>=|<=|<>|>|<|\+|-|\*|/|%)`),
+	"TOKEN_OP":         regexp.MustCompile(`^(==|>=|<=|<>|>|<|➕|➖|✖️|➗|%)`),
 	"TOKEN_NUMBER":     regexp.MustCompile(`^[0-9]+(\.[0-9]+)?`),
 	"TOKEN_STRING":     regexp.MustCompile(`^"([^"]*)"`),
-	"TOKEN_LPAREN":     regexp.MustCompile(`^\(`),
-	"TOKEN_RPAREN":     regexp.MustCompile(`^\)`),
-	"TOKEN_LBRACE":     regexp.MustCompile(`^\{`),
-	"TOKEN_RBRACE":     regexp.MustCompile(`^\}`),
+	"TOKEN_LPAREN":     regexp.MustCompile(`^🫸`),
+	"TOKEN_RPAREN":     regexp.MustCompile(`^🫷`),
+	"TOKEN_LBRACE":     regexp.MustCompile(`^👇`),
+	"TOKEN_RBRACE":     regexp.MustCompile(`^👆`),
 	"TOKEN_COMMA":      regexp.MustCompile(`^,`),
 	"TOKEN_NEWLINE":    regexp.MustCompile(`^\n`),
 }
@@ -68,23 +68,23 @@ func (p *Phase) match(pattern *regexp.Regexp) (string, bool) {
 	return "", false
 }
 
-func (p *Phase) NextToken() *common.Token {
+func (p *Phase) NextToken() *token.Token {
 
 	for p.position < len(p.source) && unicode.IsSpace(rune(p.source[p.position])) {
 		p.position++
 	}
 
 	if p.position >= len(p.source) {
-		return &common.Token{Type: TOKEN_EOF, Content: ""}
+		return &token.Token{Type: TOKEN_EOF, Content: ""}
 	}
 
 	for tokenType, pattern := range patterns {
 		if match, found := p.match(pattern); found {
 			p.position += len(match)
-			return &common.Token{Type: tokenType, Content: match}
+			return &token.Token{Type: tokenType, Content: match}
 		}
 	}
 	ch := string(p.source[p.position])
 	p.position++
-	return &common.Token{Type: TOKEN_UNKNOWN, Content: ch}
+	return &token.Token{Type: TOKEN_UNKNOWN, Content: ch}
 }
