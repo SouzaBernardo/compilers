@@ -36,5 +36,5 @@ func (c *Compiler) Parse(tokens *[]token.Token) {
 		c.parser = NewParser(*tokens)
 	}
 	c.parser.Parse()
-	fmt.Println("Sintax complete")
+	fmt.Println("Syntax complete")
 }

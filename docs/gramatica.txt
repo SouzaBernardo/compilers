@@ -1,4 +1,4 @@
-<G>    ::= '🛬' '🚧' '(' <VARS> ')' '{' <CMDS> '}'
+<G>    ::= '🛬' '🚧' '🫸' <VARS> '🫷' '👇' <CMDS> '👆'
 <VARS> ::= ε
 <VARS> ::= <VAR> , <VARS>
 <VARS> ::= <VAR>
@@ -8,14 +8,14 @@
 <TYPE> ::= 'int'
 <TYPE> ::= 'bool'
 <CMDS> ::= ε
-<CMDS> ::= <CMD> '\n' <CMDS>
+<CMDS> ::= <CMD> <CMDS>
 <CMD>  ::= <VAR_DECLARATION>
 <CMD>  ::= <CMD_IF> 
 <CMD>  ::= <CMD_LOOP> 
 <CMD>  ::= <CMD_SHOW>
-<CMD_SHOW> ::= '👀' '(' <E> ')'
-<CMD_IF> ::= '🤨' '(' <CONDI> ')' '{' <CMDS> '}'
-<CMD_LOOP> ::= '🔄' '(' <CONDI_LOOP> ')' '{' <CMDS> '}'
+<CMD_SHOW> ::= '👀' '🫸' <E> '🫷'
+<CMD_IF> ::= '🤨' '🫸' <CONDI> '🫷' '👇' <CMDS> '👆'
+<CMD_LOOP> ::= '🔄' '🫸' <CONDI_LOOP> '🫷' '👇' <CMDS> '👆'
 <CONDI_LOOP> ::= <ID> <ASSINGMENT> <NUMBER> ';' <CONDI> ; <INCREMENT>
 <INCREMENT> ::= <ID> + <NUMBER>
 <INCREMENT> ::= <ID> - <NUMBER>
@@ -37,7 +37,7 @@
 <T> ::= <F>
 <F> ::= -<F>
 <F> ::= <X>
-<X> ::= '(' <E> ')'
+<X> ::= '🫸' <E> '🫷'
 <X> ::= <NUMBER>
 <NUMBER> ::= [0-9]+('.'[0-9]+)
 <STRING> ::= [A-Z]+[0-9]*
