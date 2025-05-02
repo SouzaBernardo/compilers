@@ -18,23 +18,31 @@ func NewCompiler(source string) *Compiler {
 	}
 }
 
-func (c *Compiler) LexerValidate() *[]token.Token {
+func (c *Compiler) Compile()  {
+	tokens := c.lexerValidate()
+	if tokens == nil {
+		panic("Erro Léxico")
+	}
+	c.parse(tokens)
+}
+
+func (c *Compiler) lexerValidate() *[]token.Token {
 	if c.lexer == nil {
 		panic("Lexer is null")
 	}
 	r, err := c.lexer.Validate()
 	if err {
-		panic("error")
+		panic("Erro léxico")
 	} else {
-		fmt.Println("Lexer complete")
+		fmt.Println("Etapa léxica completada")
 	}
 	return r
 }
 
-func (c *Compiler) Parse(tokens *[]token.Token) {
+func (c *Compiler) parse(tokens *[]token.Token) {
 	if c.parser == nil {
 		c.parser = NewParser(*tokens)
 	}
 	c.parser.Parse()
-	fmt.Println("Syntax complete")
+	fmt.Println("Etapa sintática completada")
 }

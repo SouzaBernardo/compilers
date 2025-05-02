@@ -2,6 +2,7 @@ package core
 
 import (
 	"compilers/src/token"
+	"fmt"
 )
 
 type Parser struct {
@@ -20,13 +21,13 @@ func (p *Parser) Parse() bool {
 	return p.err
 }
 
-func (p *Parser) getToken() token.Token {
+func (p *Parser) getTokenPlus() token.Token {
 	currentPosition := *p.position
 	*p.position++
 	return (*p.tokens)[currentPosition]
 }
 
-func (p *Parser) getToken2() token.Token {
+func (p *Parser) getToken() token.Token {
 	return (*p.tokens)[*p.position]
 }
 
@@ -34,20 +35,11 @@ func (p *Parser) getToken2() token.Token {
 <G> ::= '🛬' '🚧' '(' <VARS> ')' '{' <CMDS> '}'
 */
 func (p *Parser) g() {
-	if p.getToken().Type != TOKEN_FUNC {
-		panic("ERoooooooo")
-	}
-
-	if p.getToken().Type != TOKEN_FUNC_MAIN {
-		panic("ERoooooooo")
-	}
-
+	p.validTokenPlus(TOKEN_FUNC)
+	p.validTokenPlus(TOKEN_FUNC_MAIN)
 	p.vars()
 	p.cmds()
-
-	if p.getToken().Type != TOKEN_EOF {
-		panic("ERoooooooo")
-	}
+	p.validTokenPlus(TOKEN_EOF)
 }
 
 /*
@@ -56,13 +48,9 @@ func (p *Parser) g() {
 <VARS> ::= ε
 */
 func (p *Parser) vars() {
-
-	if p.getToken().Type != TOKEN_LPAREN {
-		panic("ERoooooooo")
-	}
+	p.validTokenPlus(TOKEN_LPAREN)
 	p.var_token()
-
-	if (*p.tokens)[*p.position].Type == TOKEN_ID {
+	if p.getToken().Type == TOKEN_ID {
 		p.vars()
 	}
 }
@@ -72,15 +60,9 @@ func (p *Parser) vars() {
 <CMDS> ::= ε
 */
 func (p *Parser) cmds() {
-	if p.getToken().Type != TOKEN_LBRACE {
-		panic("ERoooooooo")
-	}
-
+	p.validTokenPlus(TOKEN_LBRACE)
 	p.cmd()
-
-	if p.getToken().Type != TOKEN_RBRACE {
-		panic("ERoooooooo")
-	}
+	p.validTokenPlus(TOKEN_RBRACE)
 }
 
 /*
@@ -91,20 +73,20 @@ func (p *Parser) cmds() {
 */
 func (p *Parser) cmd() {
 
-	if p.getToken2().Type == TOKEN_RBRACE {
+	if p.getToken().Type == TOKEN_RBRACE {
 		return
 	}
-	tokenType := p.getToken().Type
+	tokenType := p.getTokenPlus().Type
 	if tokenType == TOKEN_ID {
 		p.var_token()
-	} else if tokenType == TOKEN_SHOW {
-		p.show()
 	} else if tokenType == TOKEN_IF {
 		p.if_cmd()
 	} else if tokenType == TOKEN_FOR {
 		p.for_cmd()
+	} else if tokenType == TOKEN_SHOW {
+		p.show()
 	} else {
-		// panic("ERoooooooo")
+		p.showError()
 	}
 }
 
@@ -112,12 +94,32 @@ func (p *Parser) cmd() {
 <CMD_SHOW> ::= '👀' '🫸' <E> '🫷'
 */
 func (p *Parser) show() {
+
 }
 
 /*
 <CMD_IF> ::= '🤨' '🫸' <CONDI> '🫷' '👇' <CMDS> '👆'
 */
 func (p *Parser) if_cmd() {
+	p.validTokenPlus(TOKEN_IF)
+	p.validTokenPlus(TOKEN_LPAREN)
+	p.if_condi()
+	p.validTokenPlus(TOKEN_RPAREN)
+	p.validTokenPlus(TOKEN_LBRACE)
+	p.cmds()
+	p.validToken(TOKEN_RBRACE)
+}
+
+/*
+<CONDI>  ::= <E> '>' <E>
+<CONDI> ::= <E> '>=' <E>
+<CONDI> ::= <E> '<>' <E>
+<CONDI> ::= <E> '<=' <E>
+<CONDI> ::= <E> '<' <E>
+<CONDI> ::= <E> '==' <E>
+*/
+func (p *Parser) if_condi() {
+
 }
 
 /*
@@ -126,32 +128,44 @@ func (p *Parser) if_cmd() {
 func (p *Parser) for_cmd() {
 }
 
+
 func (p *Parser) var_token() {
-	if (*p.tokens)[*p.position].Type != TOKEN_ID {
-		return
-	}
+	p.validToken(TOKEN_ID)
 	p.id()
 	p.idType()
 	p.comma()
 }
 
 func (p *Parser) id() {
-	if p.getToken().Type != TOKEN_ID {
-		panic("error")
-	}
+	p.validTokenPlus(TOKEN_ID)
 }
 
 func (p *Parser) idType() {
-	if p.getToken().Type != TOKEN_TYPE {
-		panic("Erro aqui")
-	}
+	p.validTokenPlus(TOKEN_TYPE)
 }
 
 func (p *Parser) comma() {
-	token := p.getToken()
+	token := p.getTokenPlus()
 
 	if token.Type == TOKEN_COMMA || token.Type == TOKEN_RPAREN {
 		return
 	}
-	panic("err")
+	p.showError()
+}
+
+func (p *Parser) validTokenPlus(tokenType token.TokenType) {
+	if p.getTokenPlus().Type != tokenType {
+		p.showError()
+	}
+}
+
+func (p *Parser) validToken(tokenType token.TokenType) {
+	if p.getToken().Type != tokenType {
+		p.showError()
+	}
+}
+
+func (p *Parser) showError() {
+	message, _ := fmt.Printf("Erro na linha: %d", *p.position)
+	panic(message)
 }

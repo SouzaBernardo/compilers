@@ -16,8 +16,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	compiler := core.NewCompiler(source)
-	tokens := compiler.LexerValidate()
-	compiler.Parse(tokens)
+	core.NewCompiler(source).Compile()
 }
