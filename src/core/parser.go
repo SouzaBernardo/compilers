@@ -165,7 +165,7 @@ func (p *Parser) validToken(tokenType token.TokenType) {
 	}
 }
 
-func (p *Parser) showError() {
-	message, _ := fmt.Printf("Erro na linha: %d", *p.position)
+func (p *Parser) showError() {	
+	message, _ := fmt.Printf("Erro Sintático encontrado com o caractere: %s \n", p.getToken().Content)
 	panic(message)
 }
